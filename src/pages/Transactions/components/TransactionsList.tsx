@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { TransactionsQueryData } from "../../../transactions/get_transactions";
+import { TransactionsQueryData } from "../../../hooks/transactions/get_transactions";
 
 interface TransactionsProps {
-  data: TransactionsQueryData
+  data?: TransactionsQueryData
 }
 
 export const TransactionsList = ({ data }: TransactionsProps) => {

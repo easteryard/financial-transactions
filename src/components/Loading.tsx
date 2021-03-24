@@ -1,20 +1,21 @@
-// export default function Loading () {
-//   return (
-//     <OuterDiv>
-//       <Ring />
-//     </OuterDiv>
-//   )
-// }
-//
-// const OuterDiv = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 50vh;
-//   justify-content: center;
-//   align-items: center;
-// `
-
+import React from 'react'
 import styled, { keyframes } from 'styled-components';
+
+export default function Loading () {
+  return (
+    <OuterDiv>
+      <Spinner />
+    </OuterDiv>
+  )
+}
+
+const OuterDiv = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
 
 const rotate360 = keyframes`
   from {
@@ -38,5 +39,3 @@ const Spinner = styled.div`
   height: 24px;
   border-radius: 50%;
 `;
-
-export default Spinner;

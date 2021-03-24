@@ -11,9 +11,7 @@ export const App = () => {
       <StyledApp>
         <SideNavBar logo={logo} />
         <StyledMain>
-          <StyledCard>
             <Transactions userId="Fake-ID" />
-          </StyledCard>
         </StyledMain>
       </StyledApp>
     </ThemeProvider>
@@ -35,14 +33,4 @@ const StyledMain = styled.main`
   display: flex;
   align-items: flex-start;
   overflow: scroll;
-`;
-
-const StyledCard = styled.div`
-  background-color: ${({ theme }) => theme.surface};
-  padding: 32px;
-  flex: 1 0 auto;
-  border: 1px solid ${({ theme }) => theme.surfaceStroke};
-  border-radius: 24px;
-
-  flex: 1 0 auto;
 `;
