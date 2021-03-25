@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/get_transactions';
 import { Row, useFilters, useSortBy, useTable } from 'react-table'
 import { CaretDown, CaretUp, Delete } from '@styled-icons/fluentui-system-filled';
+import Tooltip from '../../../components/Tooltip';
 
 interface IProps {
   data?: TransactionsQueryData
@@ -108,6 +109,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
         onChange={e => {
           setFilter(e.target.value || undefined)
         }}
+        onClick={e => e.stopPropagation()}
         placeholder={`Filter ${count} transactions`}
       />
     ) : null
@@ -148,7 +150,6 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
 
   return (
     <StyledTransactions>
-
       <StyledTable {...getTableProps()}>
         <StyledTableHeader>
           {headerGroups.map(headerGroup => (
@@ -156,7 +157,8 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 // eslint-disable-next-line react/jsx-key
-                <StyledHeaderCell {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <StyledHeaderCell data-tip data-for={column.canSort ? 'header-cell' : null}
+                                  {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   <StyledSortIconSpan>
                     {column.isSorted
@@ -190,6 +192,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
         })}
         </tbody>
       </StyledTable>
+      <Tooltip id='header-cell' message='Hold shift to sort multiple' />
     </StyledTransactions>
   );
 };
@@ -227,7 +230,6 @@ const StyledHeaderCell = styled.th`
 
 const StyledFilterInput = styled.input`
   margin-top: 4px;
-  // border: 1px solid ${({ theme }) => theme.surfaceStroke};
 `
 
 const StyledTableRow = styled.tr`
