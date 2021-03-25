@@ -174,7 +174,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
             </tr>
           ))}
         </StyledTableHeader>
-        <tbody {...getTableBodyProps()}>
+        <StyledTableBody {...getTableBodyProps()}>
         {rows.map(row => {
           prepareRow(row)
           return (
@@ -191,7 +191,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
             </StyledTableRow>
           )
         })}
-        </tbody>
+        </StyledTableBody>
       </StyledTable>
       <Tooltip id='header-cell' message='Hold shift to sort multiple' />
     </StyledTransactions>
@@ -233,6 +233,12 @@ const StyledFilterInput = styled.input`
   margin-top: 4px;
 `
 
+const StyledTableBody = styled.tbody`
+  > :nth-child(2n+1) {
+    background-color: ${({ theme }) => theme.fade1}
+  }
+`
+
 const StyledTableRow = styled.tr`
   img {
     height: 30px;
@@ -240,7 +246,7 @@ const StyledTableRow = styled.tr`
 `;
 
 const StyledDeleteButton = styled.button`
-  background-color: ${({ theme, disabled }) => disabled ? theme.fade2 : theme.button.negative.interactive};
+  background-color: ${({ theme, disabled }) => disabled ? theme.fade3 : theme.button.negative.interactive};
   border: none;
 `
 
