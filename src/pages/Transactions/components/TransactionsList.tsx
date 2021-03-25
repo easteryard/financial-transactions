@@ -4,6 +4,7 @@ import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/
 import { Row, useFilters, useSortBy, useTable } from 'react-table'
 import { CaretDown, CaretUp, Delete } from '@styled-icons/fluentui-system-filled';
 import Tooltip from '../../../components/Tooltip';
+import { capitalizeFirstLetter } from '../../../utils/helperMethods';
 
 interface IProps {
   data?: TransactionsQueryData
@@ -91,11 +92,11 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
 
   const tableData = useMemo(() => data ? data?.transactions.map(transaction => ({
     icon: transaction.iconURL,
-    type: transaction.type,
+    type: capitalizeFirstLetter(transaction.type),
     title: transaction.localizableTitle,
     amount: transaction.billingAmount.amount,
     time: transaction.time,
-    status: transaction.status,
+    status: capitalizeFirstLetter(transaction.status),
     category: transaction.categoryIconUrl,
     action: { id: transaction.id, deleted: transaction.deleted }
   })) : [], [])

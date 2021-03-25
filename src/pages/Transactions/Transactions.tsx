@@ -4,10 +4,10 @@ import { TransactionsList } from './components/TransactionsList'
 import ConditionalRender from '../../components/CoditionalRender';
 import styled, { useTheme } from 'styled-components';
 import { useDeleteAuthorizationMutation } from '../../hooks/transactions/delete_authorization';
-import { toast } from 'react-toastify';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import { useState } from 'react';
 import useUserToken from '../../hooks/useUserToken';
+import getToast from '../../utils/toastMethods';
 
 export const Transactions = () => {
   const { userId } = useUserToken()
@@ -26,21 +26,8 @@ export const Transactions = () => {
 
   function handleDeletion () {
     deleteAuthorizationMutation({ variables: { transactionId: selectedTransactionId } })
-      .then(() => {
-        toast.success('The transaction has been deleted',
-          {
-            position: 'bottom-left',
-            autoClose: 5000,
-            pauseOnHover: true
-          })
-      })
-      .catch(() => {
-        toast.error('An error occurred during deletion', {
-          position: 'bottom-left',
-          autoClose: 5000,
-          pauseOnHover: true
-        })
-      })
+      .then(() => getToast('The transaction has been deleted'))
+      .catch(() => getToast('An error occurred during deletion', { type: 'error' }))
     setSelectedTransactionId('')
   }
 
