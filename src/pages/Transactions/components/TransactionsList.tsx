@@ -158,7 +158,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
               {headerGroup.headers.map(column => (
                 // eslint-disable-next-line react/jsx-key
                 <StyledHeaderCell data-tip data-for={column.canSort ? 'header-cell' : null}
-                                  {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                  {...column.getHeaderProps(column.getSortByToggleProps())} title=''>
                   {column.render('Header')}
                   <StyledSortIconSpan>
                     {column.isSorted
