@@ -4,7 +4,7 @@ import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/
 import { Row, useFilters, useSortBy, useTable } from 'react-table'
 import { CaretDown, CaretUp, Delete } from '@styled-icons/fluentui-system-filled';
 import Tooltip from '../../../components/Tooltip';
-import { capitalizeFirstLetter, getFormattedAmount } from '../../../utils/helperMethods';
+import { capitalizeFirstLetter, formatAmountWithCurrencyCode, formatTime } from '../../../utils/helperMethods';
 import missingImage from '../../../images/missing_image.jpg'
 
 interface IProps {
@@ -101,8 +101,8 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
     icon: transaction.iconURL,
     type: capitalizeFirstLetter(transaction.type),
     title: transaction.localizableTitle,
-    amount: getFormattedAmount(transaction.billingAmount.currency, transaction.billingAmount.amount),
-    time: transaction.time,
+    amount: formatAmountWithCurrencyCode(transaction.billingAmount.currency, transaction.billingAmount.amount),
+    time: formatTime(transaction.time),
     status: capitalizeFirstLetter(transaction.status),
     category: transaction.categoryIconUrl,
     action: { id: transaction.id, deleted: transaction.deleted }
