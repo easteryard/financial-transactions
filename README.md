@@ -2,7 +2,7 @@
 
 Welcome to the Lunar Web Code Challenge. This repo contains a (barely) working project which can fetch and show a list of financial transactions.
 
-This project is based on create-react-app with typescript and (mock) Apollo Graphql for data fetching and caching. You can run the project by doing a `npm run start` and accessing it in the browser.
+This project is based on create-react-app with TypeScript and (mock) Apollo Graphql for data fetching and caching. You can run the project by doing a `npm run start` and accessing it in the browser.
 
 We have included a mock graphql "server" with hooks to query for transactions and marking them as deleted.
 
@@ -30,13 +30,13 @@ A `deleteAuthorization` mutation hook is already made available for use.
 This should be done client-side.
 
 ## Request 3 - Transaction details
-As a user, I need to be able to view detailed transation information.
+As a user, I need to be able to view detailed transaction information.
 
 #### Acceptance Criteria
 - Further transaction details in the data must be viewable when selecting a transaction.
 
 ## Tech Debt
-- Refactor components and files into a stucture you think is awesome and scaleable for multiple new features besides a transaction view.
+- Refactor components and files into a structure you think is awesome and scaleable for multiple new features besides a transaction view.
 - Handle error and loading states better.
 
 ## Design upgrades
