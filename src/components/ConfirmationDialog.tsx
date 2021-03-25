@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from "styled-components";
-import Modal from 'react-modal'
+import Modal from './Modal';
 
 interface IProps {
-  isOpen?: boolean
+  isOpen: boolean
   dialogText: string
   confirmText?: string
   onConfirm: () => void
@@ -15,9 +15,9 @@ interface IConfirmButton {
   color?: string
 }
 
-export default function Dialog ({ isOpen, dialogText, onConfirm, onCancel, confirmColor, confirmText = 'Confirm' }: IProps) {
+export default function ConfirmationDialog ({ isOpen, dialogText, onConfirm, onCancel, confirmColor, confirmText = 'Confirm' }: IProps) {
   return (
-    <StyledModal isOpen={isOpen ?? true}>
+    <Modal isOpen={isOpen}>
       <div>
         <StyledH4>{dialogText}</StyledH4>
         <StyledActionsDiv>
@@ -25,24 +25,9 @@ export default function Dialog ({ isOpen, dialogText, onConfirm, onCancel, confi
           <StyledConfirmButton onClick={onConfirm} color={confirmColor}>{confirmText}</StyledConfirmButton>
         </StyledActionsDiv>
       </div>
-    </StyledModal>
+    </Modal>
   )
 }
-
-const StyledModal = styled(Modal)`
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 250px;
-  border: 1px solid ${({ theme }) => theme.surfaceStroke};
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.surface};
-  box-shadow: ${({ theme }) => theme.shadow.medium};
-  outline: none;
-`
 
 const StyledH4 = styled.h4`
   text-align: center;

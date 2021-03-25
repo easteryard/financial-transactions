@@ -5,7 +5,7 @@ import ConditionalRender from '../../components/CoditionalRender';
 import styled, { useTheme } from 'styled-components';
 import { useDeleteAuthorizationMutation } from '../../hooks/transactions/delete_authorization';
 import { toast } from 'react-toastify';
-import Dialog from '../../components/Dialog';
+import ConfirmationDialog from '../../components/ConfirmationDialog';
 import { useState } from 'react';
 import useUserToken from '../../hooks/useUserToken';
 
@@ -56,8 +56,9 @@ export const Transactions = () => {
           <TransactionsList data={transactionsData} handleDeletion={handleSelectTransaction} />
         )}
       </ConditionalRender>
-      <Dialog isOpen={!!selectedTransactionId} dialogText='Do you wish to delete the transaction?' confirmText='Delete'
-              onConfirm={handleDeletion} onCancel={handleDialogClose} confirmColor={theme.button.negative.interactive} />
+      <ConfirmationDialog isOpen={!!selectedTransactionId} dialogText='Do you wish to delete the transaction?'
+                          confirmText='Delete' onConfirm={handleDeletion} onCancel={handleDialogClose}
+                          confirmColor={theme.button.negative.interactive} />
     </StyledCard>
   )
 }

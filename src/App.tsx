@@ -20,7 +20,7 @@ export const App = () => {
         <SideNavBar logo={logo} />
         <StyledMain>
           <Switch>
-            <Route exact path='/transactions' component={Transactions} />
+            <Route exact path='/' component={Transactions} />
           </Switch>
         </StyledMain>
       </Router>
