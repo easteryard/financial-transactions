@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { LIGHT_THEME } from './theme';
 import { Transactions } from './pages/Transactions/Transactions';
 import logo from './logo.svg';
-import SideNavBar from "./components/SideNavBar";
+import SideNavBar from './components/SideNavBar';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import UserTokenProvider from './components/providers/UserTokenProvider';
+
+interface IGlobalProviders {
+  children: ReactNode
+}
 
 export const App = () => {
   return (
-    <ThemeProvider theme={LIGHT_THEME}>
-      <StyledApp>
+    <GlobalProviders>
+      <Router>
         <SideNavBar logo={logo} />
         <StyledMain>
-            <Transactions userId="Fake-ID" />
+          <Switch>
+            <Route exact path='/transactions' component={Transactions} />
+          </Switch>
         </StyledMain>
-      </StyledApp>
-    </ThemeProvider>
+      </Router>
+    </GlobalProviders>
   );
+};
+
+const GlobalProviders = ({ children }: IGlobalProviders) => {
+  return (
+    <ThemeProvider theme={LIGHT_THEME}>
+      <UserTokenProvider>
+          <StyledApp>
+            {children}
+          </StyledApp>
+        <ToastContainer />
+      </UserTokenProvider>
+    </ThemeProvider>
+  )
 };
 
 const StyledApp = styled.div`

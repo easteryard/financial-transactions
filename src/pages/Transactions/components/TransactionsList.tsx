@@ -1,12 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { TransactionsQueryData } from "../../../hooks/transactions/get_transactions";
+import { TransactionsQueryData } from '../../../hooks/transactions/get_transactions';
+import { TransactionsListItem } from './TransactionListItem';
 
-interface TransactionsProps {
+interface IProps {
   data?: TransactionsQueryData
+  handleDeletion: (id: string) => void
 }
 
-export const TransactionsList = ({ data }: TransactionsProps) => {
+export const TransactionsList = ({ data, handleDeletion }: IProps) => {
   return (
     <StyledTransactions>
       <StyledTable>
@@ -23,19 +25,7 @@ export const TransactionsList = ({ data }: TransactionsProps) => {
         </StyledTableHeader>
         <tbody>
         {data?.transactions.map(transaction => (
-          <StyledTransaction key={transaction.id}>
-            <td>
-              <img src={transaction.iconURL} />
-            </td>
-            <td>{transaction.type}</td>
-            <td>{transaction.localizableTitle}</td>
-            <td>{transaction.billingAmount.amount}</td>
-            <td>{transaction.time}</td>
-            <td>{transaction.status}</td>
-            <td>
-              <img src={transaction.categoryIconUrl} />
-            </td>
-          </StyledTransaction>
+          <TransactionsListItem key={transaction.id} transaction={transaction} handleDeletion={handleDeletion} />
         ))}
         </tbody>
       </StyledTable>
@@ -70,8 +60,3 @@ const StyledTableHeader = styled.thead`
   }
 `;
 
-const StyledTransaction = styled.tr`
-  img {
-    height: 30px;
-  }
-`;
