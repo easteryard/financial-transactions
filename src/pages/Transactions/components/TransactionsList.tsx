@@ -4,7 +4,8 @@ import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/
 import { Row, useFilters, useSortBy, useTable } from 'react-table'
 import { CaretDown, CaretUp, Delete } from '@styled-icons/fluentui-system-filled';
 import Tooltip from '../../../components/Tooltip';
-import { capitalizeFirstLetter } from '../../../utils/helperMethods';
+import { capitalizeFirstLetter, getFormattedAmount } from '../../../utils/helperMethods';
+import missingImage from '../../../images/missing_image.jpg'
 
 interface IProps {
   data?: TransactionsQueryData
@@ -32,13 +33,19 @@ interface IDefaultColumnFilter {
 }
 
 export const TransactionsList = ({ data, handleDeletion }: IProps) => {
-  function renderImage (row: IRowCell<string>) {
-    return <img src={row.cell.value} />
+  console.log('data: ', data)
+
+  function getMissingImage (ev: any) {
+    if (ev.target.src !== missingImage) ev.target.src = missingImage
   }
 
-  function renderActionButton (row: IRowCell<IAction>) {
+  function renderImage (source: string) {
+    return <img src={source} onError={getMissingImage} />
+  }
+
+  function renderActionButton (value: IAction) {
     return (
-      <StyledDeleteButton onClick={() => handleDeletion(row.cell.value.id)} disabled={!!row.cell.value.deleted}>
+      <StyledDeleteButton onClick={() => handleDeletion(value.id)} disabled={!!value.deleted}>
         <StyledDeleteIcon />
       </StyledDeleteButton>
     )
@@ -47,7 +54,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
   const columns = useMemo(() => [
     {
       Header: 'Icon',
-      Cell: (row: IRowCell<string>) => renderImage(row),
+      Cell: (row: IRowCell<string>) => renderImage(row.cell.value),
       accessor: 'icon' as const,
       disableFilters: true
     },
@@ -77,13 +84,13 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
     },
     {
       Header: 'Category',
-      Cell: (row: IRowCell<string>) => renderImage(row),
+      Cell: (row: IRowCell<string>) => renderImage(row.cell.value),
       accessor: 'category' as const,
       disableFilters: true
     },
     {
       Header: '',
-      Cell: (row: IRowCell<IAction>) => renderActionButton(row),
+      Cell: (row: IRowCell<IAction>) => renderActionButton(row.cell.value),
       accessor: 'action' as const,
       disableFilters: true,
       disableSortBy: true
@@ -94,7 +101,7 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
     icon: transaction.iconURL,
     type: capitalizeFirstLetter(transaction.type),
     title: transaction.localizableTitle,
-    amount: transaction.billingAmount.amount,
+    amount: getFormattedAmount(transaction.billingAmount.currency, transaction.billingAmount.amount),
     time: transaction.time,
     status: capitalizeFirstLetter(transaction.status),
     category: transaction.categoryIconUrl,

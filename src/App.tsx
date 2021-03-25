@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { LIGHT_THEME } from './theme';
 import { Transactions } from './pages/Transactions/Transactions';
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import SideNavBar from './components/SideNavBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
