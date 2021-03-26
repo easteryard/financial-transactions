@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/get_transactions';
 import { Row, useFilters, useSortBy, useTable } from 'react-table'
 import { CaretDown, CaretUp, Delete } from '@styled-icons/fluentui-system-filled';
+import { Transaction, TransactionsQueryData } from '../../../hooks/transactions/get_transactions';
 import Tooltip from '../../../components/Tooltip';
 import { capitalizeFirstLetter, formatAmountWithCurrencyCode, formatTime } from '../../../utils/helperMethods';
 import missingImage from '../../../images/missing_image.jpg'
@@ -33,24 +33,6 @@ interface IDefaultColumnFilter {
 }
 
 export const TransactionsList = ({ data, handleDeletion }: IProps) => {
-  console.log('data: ', data)
-
-  function getMissingImage (ev: any) {
-    if (ev.target.src !== missingImage) ev.target.src = missingImage
-  }
-
-  function renderImage (source: string) {
-    return <img src={source} onError={getMissingImage} />
-  }
-
-  function renderActionButton (value: IAction) {
-    return (
-      <StyledDeleteButton onClick={() => handleDeletion(value.id)} disabled={!!value.deleted}>
-        <StyledDeleteIcon />
-      </StyledDeleteButton>
-    )
-  }
-
   const columns = useMemo(() => [
     {
       Header: 'Icon',
@@ -107,6 +89,22 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
     category: transaction.categoryIconUrl,
     action: { id: transaction.id, deleted: transaction.deleted }
   })) : [], [])
+
+  function getMissingImage (ev: any) {
+    if (ev.target.src !== missingImage) ev.target.src = missingImage
+  }
+
+  function renderImage (source: string) {
+    return <img src={source} onError={getMissingImage} />
+  }
+
+  function renderActionButton (value: IAction) {
+    return (
+      <StyledDeleteButton onClick={() => handleDeletion(value.id)} disabled={!!value.deleted}>
+        <StyledDeleteIcon />
+      </StyledDeleteButton>
+    )
+  }
 
   function DefaultColumnFilter({ column: { filterValue, preFilteredRows, canFilter, setFilter } }: IDefaultColumnFilter) {
     const count = preFilteredRows.length

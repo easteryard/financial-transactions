@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import styled, { useTheme } from 'styled-components';
 import { TransactionsQueryData, useTransactionsQuery } from '../../hooks/transactions/get_transactions';
+import { useDeleteAuthorizationMutation } from '../../hooks/transactions/delete_authorization';
+import useUserToken from '../../hooks/useUserToken';
 import { TransactionsList } from './components/TransactionsList'
 import ConditionalRender from '../../components/CoditionalRender';
-import styled, { useTheme } from 'styled-components';
-import { useDeleteAuthorizationMutation } from '../../hooks/transactions/delete_authorization';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
-import { useState } from 'react';
-import useUserToken from '../../hooks/useUserToken';
 import getToast from '../../utils/toastMethods';
 
 export const Transactions = () => {

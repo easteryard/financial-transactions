@@ -1,13 +1,14 @@
 import React, { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { LIGHT_THEME } from './theme';
-import { Transactions } from './pages/Transactions/Transactions';
-import logo from './images/logo.svg';
-import SideNavBar from './components/SideNavBar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { LIGHT_THEME } from './theme';
+import SideNavBar from './components/SideNavBar';
 import UserTokenProvider from './components/providers/UserTokenProvider';
+import logo from './images/logo.svg';
+
+import { Transactions } from './pages/Transactions/Transactions';
 
 interface IGlobalProviders {
   children: ReactNode
@@ -32,9 +33,9 @@ const GlobalProviders = ({ children }: IGlobalProviders) => {
   return (
     <ThemeProvider theme={LIGHT_THEME}>
       <UserTokenProvider>
-          <StyledApp>
-            {children}
-          </StyledApp>
+        <StyledApp>
+          {children}
+        </StyledApp>
         <ToastContainer />
       </UserTokenProvider>
     </ThemeProvider>

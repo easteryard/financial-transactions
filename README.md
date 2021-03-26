@@ -1,3 +1,9 @@
+# The solution
+
+Within this project you're able to see a list of transactions as well as delete them.
+It's also possible to filter transactions by title and status, and if you fancy sorting
+you're able to do so by each shown value.
+
 # Lunar Frontend Challenge
 
 Welcome to the Lunar Web Code Challenge. This repo contains a (barely) working project which can fetch and show a list of financial transactions.
