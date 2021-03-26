@@ -159,12 +159,10 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
       <StyledTable {...getTableProps()}>
         <StyledTableHeader>
           {headerGroups.map(headerGroup => (
-            // eslint-disable-next-line react/jsx-key
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()} key={`header-tr-${headerGroup.id}`}>
               {headerGroup.headers.map(column => (
-                // eslint-disable-next-line react/jsx-key
                 <StyledHeaderCell data-tip data-for={column.canSort ? 'header-cell' : null}
-                                  {...column.getHeaderProps(column.getSortByToggleProps())} title=''>
+                                  {...column.getHeaderProps(column.getSortByToggleProps())} key={`th-${column.id}`} title=''>
                   {column.render('Header')}
                   <StyledSortIconSpan>
                     {column.isSorted
@@ -183,12 +181,10 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
         {rows.map(row => {
           prepareRow(row)
           return (
-            // eslint-disable-next-line react/jsx-key
-            <StyledTableRow {...row.getRowProps()}>
+            <StyledTableRow {...row.getRowProps()} key={`tr-${row.id}`}>
               {row.cells.map(cell => {
                 return (
-                  // eslint-disable-next-line react/jsx-key
-                  <td {...cell.getCellProps()}>
+                  <td {...cell.getCellProps()} key={`data-cell-${row.id}-${cell.column.id}`}>
                     {cell.render('Cell')}
                   </td>
                 )
