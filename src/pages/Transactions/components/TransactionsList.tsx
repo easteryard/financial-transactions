@@ -195,7 +195,6 @@ export const TransactionsList = ({ data, handleDeletion }: IProps) => {
         </StyledTableBody>
       </StyledTable>
       <Tooltip id='header-cell' message='Hold shift to sort multiple' />
-      <p>hey</p>
     </StyledTransactions>
   );
 };
